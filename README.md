@@ -19,3 +19,9 @@ E.g.
 ```bash
 ruby ./find_content.rb something ./myfile.txt
 ```
+
+To enable debugging information, it can be run like this:
+
+```bash
+DEBUG=true ruby ./find_content.rb something ./myfile.txt
+```
