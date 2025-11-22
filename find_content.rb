@@ -3,23 +3,21 @@ require "io/console"
 def find_content(search_term, file_path, case_insensitive_sorted_file=false)
   debug_mode = ENV["DEBUG"] == "true"
   
+  if File.directory? file_path
+    raise StandardError.new("Provided file path needs to point to a file, not a directory.")
+  end
+  
   file_size = File.size(file_path)
   
   window_start_position = 0
   window_end_position = file_size
   
   previous_window = [0,0]
-  
   current_closest_match = ""
-  
-  if File.directory? file_path
-    raise StandardError.new("Provided file path needs to point to a file, not a directory.")
-  end
   
   require_precise_read = false
   
   open file_path, "r" do |file|
-    
     while true
       
       current_window = [window_start_position, window_end_position]
